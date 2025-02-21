@@ -24,7 +24,6 @@ import { Dialog, DialogTrigger, Popover } from "react-aria-components";
 import { EditorToolConfig } from "../../editor/tool-config";
 import { Toolkits, ToolkitConfig } from "../tool-config";
 import { useMatch } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HUDSubGrid } from "../hud-sub-grid";
 import { SketchfabImportTool } from "../../sketch-fab/sketch-fab-importer";
 import { useSceneSettings } from "../../scene/scene-store";
@@ -133,7 +132,8 @@ export function Toolbar(props: { identityDialog: boolean, selectedToolkit: strin
           ))
         }
         <ToolkitButton onPress={() => props.toggleToolkit('gltf')} isActive={props.selectedToolkit === 'gltf'}>
-          <span >{<Icon icon={gltfToolkit.icon} />}</span>
+          <span >
+            <calcite-icon icon={gltfToolkit.icon}></calcite-icon></span>
           <span className="text-xs">{gltfToolkit.name}</span>
           <SketchfabImportTool onComplete={() => props.toggleToolkit('gltf')} />
         </ToolkitButton>
@@ -216,7 +216,9 @@ function Toolkit(props: PropsWithChildren<{
   return (
     <DialogTrigger>
       <ToolkitButton ref={buttonRef} onPress={() => props.toggle()} isActive={props.selected}>
-        <span >{<Icon icon={props.tool.icon} />}</span>
+        <span>
+          <calcite-icon icon={props.tool.icon}></calcite-icon>
+        </span>
         <span className="text-xs">{props.tool.name}</span>
       </ToolkitButton>
       <Popover
@@ -274,8 +276,4 @@ function DynamicTools(props: { toolkit: ToolkitConfig, item: PortalItem }) {
       </GridButtonToolTrigger>
     ))
   )
-}
-
-function Icon(props: ComponentProps<typeof FontAwesomeIcon>) {
-  return <FontAwesomeIcon {...props} className='h-[25px] aspect-square' />
 }

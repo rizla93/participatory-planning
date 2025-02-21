@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-import * as FA from '@fortawesome/free-solid-svg-icons'
 import PolygonSymbol3D from "@arcgis/core/symbols/PolygonSymbol3D";
 import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol";
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
@@ -28,7 +27,7 @@ export type ToolkitConfig = {
   name: string;
   elevationMode: GraphicsLayer['elevationInfo']['mode'];
   closeWhenActive: boolean,
-  icon: FA.IconDefinition,
+  icon: string,
   tools?: EditorToolConfig[],
   drawingMode: 'single' | 'continuous';
 }
@@ -40,7 +39,7 @@ export const Toolkits: ToolkitConfig[] = [
     name: 'Ground',
     elevationMode: 'on-the-ground',
     closeWhenActive: false,
-    icon: FA.faLayerGroup,
+    icon: 'layers-editable',
     drawingMode: 'single',
     tools: [
       {
@@ -94,7 +93,7 @@ export const Toolkits: ToolkitConfig[] = [
     name: 'Paths',
     elevationMode: 'on-the-ground',
     closeWhenActive: false,
-    icon: FA.faRoad,
+    icon: 'scan-vertical',
     drawingMode: 'single',
     tools: [
       {
@@ -120,7 +119,7 @@ export const Toolkits: ToolkitConfig[] = [
     name: 'Buildings',
     elevationMode: 'on-the-ground',
     closeWhenActive: false,
-    icon: FA.faBuilding,
+    icon: 'measure-building-height-top-base',
     drawingMode: 'single',
     tools: [
       {
@@ -178,7 +177,7 @@ export const Toolkits: ToolkitConfig[] = [
     name: 'Icons',
     elevationMode: 'relative-to-scene',
     closeWhenActive: true,
-    icon: FA.faMapMarkerAlt,
+    icon: 'pin-tear',
     drawingMode: 'continuous'
   },
   {
@@ -186,7 +185,7 @@ export const Toolkits: ToolkitConfig[] = [
     name: 'Trees',
     elevationMode: 'relative-to-scene',
     closeWhenActive: true,
-    icon: FA.faTree,
+    icon: 'brush-tip',
     drawingMode: 'continuous'
   },
   {
@@ -194,16 +193,24 @@ export const Toolkits: ToolkitConfig[] = [
     name: 'Vehicles',
     elevationMode: 'relative-to-scene',
     closeWhenActive: true,
-    icon: FA.faCar,
+    icon: 'car',
     drawingMode: 'continuous'
   },
   {
     id: 'gltf',
     name: 'glTF',
-    icon: FA.faCloudDownloadAlt,
+    icon: 'superimpose',
     elevationMode: 'relative-to-scene',
     closeWhenActive: true,
     drawingMode: 'single'
+  },
+  {
+    id: 'viewshed',
+    name: 'Viewshed',
+    icon: 'viewshed',
+    elevationMode: 'relative-to-scene',
+    closeWhenActive: true,
+    drawingMode: 'single',
   }
 ]
 
