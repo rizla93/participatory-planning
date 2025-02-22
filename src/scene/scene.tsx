@@ -53,6 +53,7 @@ export function View({ children }: PropsWithChildren) {
 
   const scene = useWebScene();
   const view = useRef<ArcgisSceneView>(null);
+
   const { data: settings } = useSuspenseQuery(useSettingsQueryOptions()); const polygon = useMemo(() => new Polygon({
     rings: [settings.planningArea],
     spatialReference: SpatialReference.WebMercator
@@ -109,7 +110,7 @@ export function View({ children }: PropsWithChildren) {
       buildingLayerView.filter = null!;
     }
   }, [buildingLayerView, polygon, showBuildings]);
-
+  
   return (
     <SceneView ref={view}>
       <VectorTileLayer
@@ -146,3 +147,4 @@ export function View({ children }: PropsWithChildren) {
     </SceneView>
   )
 }
+

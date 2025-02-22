@@ -36,6 +36,7 @@ import { GraphicsLayer, useGraphicsContext } from "../../arcgis/components/graph
 import { useSettingsQueryOptions } from "../../scene/settings";
 import Polygon from "@arcgis/core/geometry/Polygon";
 import SpatialReference from "@arcgis/core/geometry/SpatialReference";
+import { createViewshed } from "../dialogs/viewshed";
 
 export function Toolbar(props: { identityDialog: boolean, selectedToolkit: string | null, toggleToolkit: (toolkit: string) => void; }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -45,6 +46,7 @@ export function Toolbar(props: { identityDialog: boolean, selectedToolkit: strin
     .filter(toolkit => toolkit.tools != null);
 
   const gltfToolkit = Toolkits.find(toolkit => toolkit.id === 'gltf')!;
+  const viewshedToolkit = Toolkits.find(toolkit => toolkit.id === 'viewshed')!;
 
   const isRootRoute = useMatch("/") != null;
 
@@ -100,7 +102,7 @@ export function Toolbar(props: { identityDialog: boolean, selectedToolkit: strin
                     id={tool.id}
                     label={tool.label}
                     drawingMode={toolkit.drawingMode}
-                    symbol={tool.symbol}
+                    symbol={tool.symbol!}
                   />
                 ))}
               </HUDSubBar>
@@ -159,16 +161,22 @@ function useTool(props: EditorToolConfig) {
   }), [settings.planningArea])
 
   const mutation = useMutation({
-    mutationFn: () => {
-      const operation = createGeometry({
-        view,
-        layer,
-        symbol: props.symbol,
-        boundary: polygon
-      })
-
-      editor.applyOperation(operation);
-      return operation.promise;
+    mutationFn: async () => {
+      if (props.id === 'viewshed') {
+        createViewshed({ view }); // Directly call createViewshed
+        return; // Return void
+      } else {
+        const operation = createGeometry({
+          view,
+          layer,
+          symbol: props.symbol,
+          boundary: polygon
+        })
+  
+        editor.applyOperation(operation);
+        await operation.promise;
+        return; // Return void
+      }
     },
     onSuccess: () => {
       if (props.drawingMode === 'continuous') mutation.mutate();

@@ -29,7 +29,7 @@ export type ToolkitConfig = {
   closeWhenActive: boolean,
   icon: string,
   tools?: EditorToolConfig[],
-  drawingMode: 'single' | 'continuous';
+  drawingMode: 'single' | 'continuous'; 
 }
 
 const BUILDING_FLOOR_HEIGHT = 3;
@@ -209,15 +209,21 @@ export const Toolkits: ToolkitConfig[] = [
     name: 'Viewshed',
     icon: 'viewshed',
     elevationMode: 'relative-to-scene',
-    closeWhenActive: true,
+    closeWhenActive: false,
     drawingMode: 'single',
+    tools: [
+      {
+        id: 'viewshed',
+        label: 'Add viewshed'
+      }
+    ]
   }
 ]
 
 export type EditorToolConfig = {
   id: string;
   label: string;
-  symbol: Symbol;
+  symbol?: Symbol;
   thumbnail?: string;
   createOperation?: (sketch: SketchViewModel) => void;
 }
