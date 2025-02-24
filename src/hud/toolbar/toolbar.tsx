@@ -46,7 +46,6 @@ export function Toolbar(props: { identityDialog: boolean, selectedToolkit: strin
     .filter(toolkit => toolkit.tools != null);
 
   const gltfToolkit = Toolkits.find(toolkit => toolkit.id === 'gltf')!;
-  const viewshedToolkit = Toolkits.find(toolkit => toolkit.id === 'viewshed')!;
 
   const isRootRoute = useMatch("/") != null;
 
