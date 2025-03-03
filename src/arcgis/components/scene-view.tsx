@@ -16,7 +16,7 @@
 import { createContext, forwardRef, PropsWithChildren, useContext, useEffect, useState } from "react"
 import ArcgisSceneView from '@arcgis/core/views/SceneView';
 
-import '@arcgis/core/assets/esri/themes/dark/main.css'
+import '@arcgis/core/assets/esri/themes/light/main.css'
 import { useWebScene } from "./web-scene";
 import Expand from '@arcgis/core/widgets/Expand';
 import Weather from '@arcgis/core/widgets/Weather';
